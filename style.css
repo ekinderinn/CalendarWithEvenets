@@ -1,0 +1,242 @@
+@import url(https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
+:root {
+  --primary-color: #660066;
+  --text-color: #1d1d1d;
+  --bg-color: #e6e6ff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: #fff;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  margin:auto;
+}
+
+.calendar {
+  width: 100%;
+  max-width: 600px;
+  padding: 30px 20px;
+  border-radius: 10px;
+  background-color: var(--bg-color);
+}
+
+.calendar .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #ccc;
+}
+
+.calendar .header .month {
+  display: flex;
+  align-items: center;
+  font-size: 25px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.calendar .header .btns {
+  display: flex;
+  gap: 10px;
+}
+
+.calendar .header .btns .btn {
+  width: 50px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #660066;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.calendar .header .btns .btn:hover {
+  background-color: #b955bb;
+  transform: scale(1.05);
+}
+
+.weekdays {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.weekdays .day {
+  width: calc(100% / 7 - 10px);
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.days {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.days .day {
+  width: calc(100% / 7 - 10px);
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text-color);
+  background-color: #fff;
+  transition: all 0.3s;
+}
+
+.days .day:not(.next):not(.prev):hover {
+  color: #fff;
+  background-color: #b955bb;
+  transform: scale(1.05);
+}
+
+.days .day.today {
+  color: #fff;
+  background-color: var(--primary-color);
+}
+
+.days .day.next,
+.days .day.prev {
+  color: #ccc;
+}
+
+.add-event-form {
+  background-color: var(--bg-color);
+  border-radius: 10px;
+  padding: 10px;
+  margin-left: 10px; /* Add left margin for spacing */
+  position: relative;
+}
+
+.add-event-form h2 {
+  margin-top: 0;
+}
+
+.add-event-form label {
+  display: block;
+  margin-top: 10px;
+  color: var(--text-color);
+  font-weight: bold;
+}
+
+.add-event-form input {
+  width: 100%;
+  padding: 5px;
+  margin-top: 5px;
+}
+
+.add-event-form button {
+  background-color: #660066;
+  color: #fff;
+  padding: 5px 10px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.add-event-form button#close-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: #660066;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 10px; /* Optional: Add border-radius for a circular close button */
+  cursor: pointer;
+}
+.add-event-form button:hover {
+  background-color: #b955bb;
+}
+.event-container {
+  display: flex;
+  margin: 0 10px; /* Equal left and right spacing */
+}
+.event-list {
+  width: 25%; /* Adjust the width as needed */
+  padding: 10px;
+  background-color: var(--bg-color);
+  border-radius: 10px;
+  position: relative;
+  display: none;
+  margin-right: 10px; /* Adjust the margin to separate the calendar and event list */
+}
+#events-for-selected-day {
+  list-style-type: none;
+  padding: 0;
+}
+
+#events-for-selected-day li {
+  margin-bottom: 5px;
+  font-size: 16px;
+  color: var(--text-color);
+}
+
+#events-for-selected-day li:before {
+  content: '\2022'; /* Add a bullet point before each event */
+  display: inline-block;
+  margin-right: 5px;
+  font-size: 18px;
+  color: var(--primary-color);
+}
+
+#events-for-selected-day {
+  list-style-type: none;
+  padding: 0;
+  display: none; /* Initially hide the events section */
+}
+
+.delete-button {
+  background-color: #660066; /* Set the background color */
+  color: #fff; /* Set the text color */
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 10px;
+  margin-left: 10px; /* Add some margin to separate it from the event text */
+}
+
+.delete-button:hover {
+  background-color: #b955bb; /* Change the background color on hover */
+}
+
+/* Add a star icon to days with events */
+.days .day.has-events {
+  position: relative;
+}
+
+
+.days .day.has-events::before {
+  content: '\2605'; /* Unicode character for a star */
+  position: absolute;
+  top: 5px; /* Adjust the vertical position of the star */
+  right: 5px; /* Adjust the horizontal position of the star */
+  font-size: 18px;
+  color: var(--primary-color);
+}
